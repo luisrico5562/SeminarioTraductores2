@@ -9,9 +9,6 @@ public class MainClass {
         
         Interfaz interfaz = new Interfaz();
         Color fondo = new Color(31, 31, 31);
-
-        //interfaz.txtpaneCodigo.setSelectionColor(new Color(255,0,0));
-        //interfaz.bLexico.setHoverBackgroundColor(new Color(3, 59, 90).brighter());
         
         interfaz.setBounds(0, 0, 960, 540);
         interfaz.getContentPane().setBackground(fondo);

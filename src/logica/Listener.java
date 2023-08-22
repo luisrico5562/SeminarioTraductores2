@@ -29,11 +29,11 @@ public class Listener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         
+        // Botones interfaz
         if (e.getSource() == interfaz.bReiniciar) {
             interfaz.txtpaneCodigo.setText("");
             interfaz.txtpaneResultado.setText("");
         }
-
         if (e.getSource() == interfaz.bLexico) {
             interfaz.analizadorActual = 1;
             
@@ -82,31 +82,43 @@ public class Listener implements ActionListener {
 
         if (e.getSource() == interfaz.bCorrer && interfaz.analizadorActual == 1) {          // LEXICO
             
-            // Se manda todo el texto de txtpaneCodigo
+            // Se manda todo el texto de txtPaneCodigo
             // y se retorna un arreglo de dos dimensiones 
             // (una con la subcadena y otra con el tipo)
             
             String[][] analizado;
             AnalizadorLexico anLexico = new AnalizadorLexico();
             analizado = anLexico.lexico(interfaz.txtpaneCodigo.getText());
-            String texto = "Símbolo - Tipo\n";
+            String texto = "SÍMBOLO [NUM] TIPO\n\n";
             for (int i = 0; i < 100; i++) {
                 if (analizado[i][0] == null) {
                     break;
                 }
-
                 // Se revisa si el tipo es igual a 24, en cuyo caso se imprime ERROR
                 // Si no, se imprime la cadena y el tipo
-                if (analizado[i][1].length() == 2) {
-                    if (analizado[i][1].charAt(0) == '2' && analizado[i][1].charAt(1) == '4') {
-                        texto += analizado[i][0] + " - ERROR\n";
-                    } else {
-                        texto += analizado[i][0] + " - " + analizado[i][1] + "\n";
-                    }
+                if (Integer.parseInt(analizado[i][1]) == 24) {
+                    texto += analizado[i][0] + " - ERROR";
                 } else {
-                    texto += analizado[i][0] + " - " + analizado[i][1] + "\n";
+                    texto += analizado[i][0] + " [" + analizado[i][1] + "] ";
                 }
                 
+                // Se agrega el tipo a cada dato
+                switch (Integer.parseInt(analizado[i][1])) {
+                    case 0: texto += "identificador"; break;
+                    case 1: texto += "entero"; break;
+                    case 2: texto += "real"; break;
+                    case 3: texto += "cadena"; break;
+                    case 4: texto += "tipo"; break;
+                    case 5: texto += "opSuma"; break;
+                    case 6: texto += "opMul"; break;
+                    case 7: texto += "opRelac"; break;
+                    case 8: texto += "opOr"; break;
+                    case 9: texto += "opAnd"; break;
+                    case 10: texto += "opNot"; break;
+                    case 11: texto += "opIgualdad"; break;
+                    default: break;
+                }
+                texto += "\n";
             }
             interfaz.txtpaneResultado.setText(texto);
             

@@ -88,7 +88,7 @@ public class Listener implements ActionListener {
             
             String[][] analizado;
             AnalizadorLexico anLexico = new AnalizadorLexico();
-            analizado = anLexico.lexico(interfaz.txtpaneCodigo.getText());
+            analizado = anLexico.lexico(interfaz.txtpaneCodigo.getText().trim());
             String texto = "SÍMBOLO [NUM] TIPO\n\n";
             for (int i = 0; i < 100; i++) {
                 if (analizado[i][0] == null) {

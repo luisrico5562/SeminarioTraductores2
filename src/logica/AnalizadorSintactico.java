@@ -21,8 +21,8 @@ public class AnalizadorSintactico {
         int[][] tablaLR1 = {
             {2,0, 0,1},
             {0,0,-1,0},
-            {0,3, 0,0},
-            {4,0, 0,0},
+            {0,3,-3,0},
+            {2,0, 0,4},
             {0,0,-2,0}};
         
         // id = 0
@@ -82,7 +82,13 @@ public class AnalizadorSintactico {
                     pila.pop();
                     pila.pop();
                     pilaLex.push("E");
+                    
+                } else if (salida == -3) {
+                    pila.pop();
+                    pila.pop();
+                    pilaLex.push("E");
                 }
+                
             // La salida cayó en una casilla 0
             } else {
                 textoPila[posTextoPila] = "ERROR";

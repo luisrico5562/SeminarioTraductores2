@@ -1,9 +1,11 @@
 # Seminario de Traductores II
 Repositorio para la materia Seminario de Solución de Problemas de Traductores de Lenguajes II
 
-Este proyecto consiste en la creación de un traductor, el cual consiste en 3 partes principales, o analizadores: léxico, sintáctico y semántico.
+Este proyecto consiste en la creación de un traductor, el cual consta de 3 partes principales, o analizadores: léxico, sintáctico y semántico.
 
-El lenguaje de programación utilizado para la totalidad del proyecto es Java.
+El lenguaje de programación utilizado para la totalidad del proyecto es Java en NetBeans.
+
+### NOTA: El repositorio está creado directamente desde NetBeans, por lo que todos los códigos se encuentran dentro de la carpeta "src".
 
 ## Analizador léxico
 Para el analizador léxico la cadena de entrada primero pasa por 3 procesos para separar cada subcadena con el fin de poder ser analizada por el autómata. dichos procesos son los siguientes:
@@ -59,3 +61,29 @@ NOTA : para S31, S32 Y S33 se revisa si la cadena tiene más caracteres, para de
 
 
 [Ver analizador léxico](https://github.com/luisrico5562/SeminarioTraductores2)
+
+## Analizador sintáctico
+### [Mini analizador sintáctico - Ejercicio 1](https://github.com/luisrico5562/SeminarioTraductores2/tree/Branch-Mini-Analizador-Sintactico-Ejercicio1)
+En este ejercicio se crea un analizador sintáctico con la siguiente regla:
+
+R1: E -> id + id
+
+#### El resultado es el siguiente:
+![java_lBaKwoHmUK](https://github.com/luisrico5562/SeminarioTraductores2/assets/127691671/9b5f2d94-551f-4dc6-be6e-9789c8ed886b)
+
+
+[Ver mini analizador sintáctico - Ejercicio 1 (branch)](https://github.com/luisrico5562/SeminarioTraductores2/tree/Branch-Mini-Analizador-Sintactico-Ejercicio1)
+
+
+### [Mini analizador sintáctico - Ejercicio 2](https://github.com/luisrico5562/SeminarioTraductores2/tree/Branch-Mini-Analizador-Sintactico-Ejercicio2)
+En este ejercicio se crea un analizador sintáctico con las siguientes reglas:
+
+R1: E -> id + E
+
+R2: E -> id
+
+#### El resultado es el siguiente:
+![java_clxUV8Gmzl](https://github.com/luisrico5562/SeminarioTraductores2/assets/127691671/5078249d-8b39-4f0a-96e5-f7678a556bed)
+
+
+[Ver mini analizador sintáctico - Ejercicio 2 (branch)](https://github.com/luisrico5562/SeminarioTraductores2/tree/Branch-Mini-Analizador-Sintactico-Ejercicio2)

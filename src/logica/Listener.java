@@ -163,18 +163,18 @@ public class Listener implements ActionListener {
             
             // Se analiza sintácticamente si no hay errores léxicos
             if (errorLexico == false) {
-                String[] analizadoSin;
+                String[][] analizadoSin;
                 AnalizadorSintactico anSintactico = new AnalizadorSintactico();
-                analizadoSin = anSintactico.sintactico(pilaLexVolteada, largoAnLex);
+                analizadoSin = anSintactico.sintactico(pilaLexVolteada, analizadoLex, largoAnLex);
                 
                 String texto = "";
                 
                 // Se imprimen los estados de la pila
                 for (int i = 0; i < 100; i++) {
-                    if (analizadoSin[i] == null) {
+                    if (analizadoSin[i][0] == null) {
                         break;
                     }
-                    texto += analizadoSin[i] + "\n";
+                    texto += analizadoSin[i][0] + "\n";
                 }
                 interfaz.txtpaneResultado.setText(texto);
             }

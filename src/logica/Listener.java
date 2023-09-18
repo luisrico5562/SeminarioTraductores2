@@ -3,6 +3,7 @@ package logica;
 import gui.Interfaz;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 public class Listener implements ActionListener {
 
@@ -36,6 +37,7 @@ public class Listener implements ActionListener {
         }
         if (e.getSource() == interfaz.bLexico) {
             interfaz.analizadorActual = 1;
+            interfaz.txtpaneResultado.setText("");
             
             interfaz.bLexico.setBackground(gris);
             interfaz.bLexico.setForeground(colorFuenteAzul);
@@ -51,6 +53,7 @@ public class Listener implements ActionListener {
         }
         if (e.getSource() == interfaz.bSintactico) {
             interfaz.analizadorActual = 2;
+            interfaz.txtpaneResultado.setText("");
             
             interfaz.bLexico.setBackground(grisOscuro);
             interfaz.bLexico.setForeground(colorFuenteTB);
@@ -66,6 +69,7 @@ public class Listener implements ActionListener {
         }
         if (e.getSource() == interfaz.bSemantico) {
             interfaz.analizadorActual = 3;
+            interfaz.txtpaneResultado.setText("");
             
             interfaz.bLexico.setBackground(grisOscuro);
             interfaz.bLexico.setForeground(colorFuenteTB);
@@ -88,7 +92,7 @@ public class Listener implements ActionListener {
             
             String[][] analizado;
             AnalizadorLexico anLexico = new AnalizadorLexico();
-            analizado = anLexico.lexico(interfaz.txtpaneCodigo.getText());
+            analizado = anLexico.lexico(interfaz.txtpaneCodigo.getText().trim());
             String texto = "SÍMBOLO [NUM] TIPO\n\n";
             for (int i = 0; i < 100; i++) {
                 if (analizado[i][0] == null) {
@@ -124,8 +128,60 @@ public class Listener implements ActionListener {
             
             
         } else if (e.getSource() == interfaz.bCorrer && interfaz.analizadorActual == 2) {   // SINTACTICO
+            
+            String[][] analizadoLex;
+            AnalizadorLexico anLexico = new AnalizadorLexico();
+            analizadoLex = anLexico.lexico(interfaz.txtpaneCodigo.getText().trim());
+            
+            //String[] valoresLex = new String[100];
+            Stack pilaLex = new Stack();
+            boolean errorLexico = false;
+            int largoAnLex = 0;
+            
+            // Analizando la entrada con el analizador léxico
+            for (int i = 0; i < 100; i++) {
+                if (analizadoLex[i][0] == null) {
+                    largoAnLex = i;
+                    break;
+                }
+                
+                if (Integer.parseInt(analizadoLex[i][1]) == 24) {
+                    interfaz.txtpaneResultado.setText("Error léxico: '" + analizadoLex[i][0] + "'");
+                    errorLexico = true;
+                    break;
+                }
+                pilaLex.push(analizadoLex[i][1]);
+            }
+            
+            // Invirtiendo la pila
+            Stack pilaLexVolteada = new Stack();
+            pilaLexVolteada.push("$");
+            while (pilaLex.empty() != true) {
+                pilaLexVolteada.push(pilaLex.peek());
+                pilaLex.pop();
+            }
+            
+            // Se analiza sintácticamente si no hay errores léxicos
+            if (errorLexico == false) {
+                String[][] analizadoSin;
+                AnalizadorSintactico anSintactico = new AnalizadorSintactico();
+                analizadoSin = anSintactico.sintactico(pilaLexVolteada, analizadoLex, largoAnLex);
+                
+                String texto = "";
+                
+                // Se imprimen los estados de la pila
+                for (int i = 0; i < 100; i++) {
+                    if (analizadoSin[i][0] == null) {
+                        break;
+                    }
+                    texto += analizadoSin[i][0] + "\n";
+                }
+                interfaz.txtpaneResultado.setText(texto);
+            }
 
         } else if (e.getSource() == interfaz.bCorrer && interfaz.analizadorActual == 3) {   // SEMANTICO
+            
+            interfaz.txtpaneResultado.setText("");
 
         }
     }

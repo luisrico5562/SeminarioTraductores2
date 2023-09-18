@@ -44,6 +44,7 @@ public class Interfaz extends JFrame {
         Font fuenteInterfaz = new Font("Microsoft PhagsPa", Font.PLAIN, 18);
         Font fuenteTaskbar = new Font("Microsoft PhagsPa", Font.BOLD, 18);
         Font fuenteCodigo = new Font("Roboto Mono", Font.PLAIN, 18);
+        Font fuenteResultado = new Font("Roboto Mono", Font.PLAIN, 16);
         
         // Listener
         Listener listener = new Listener(this);
@@ -108,7 +109,7 @@ public class Interfaz extends JFrame {
         txtpaneCodigo.setForeground(colorFuente);
         txtpaneCodigo.setBackground(grisClaro);
         scrollCodigo = new JScrollPane(txtpaneCodigo);
-        scrollCodigo.setBounds(140, 90, 435, 410);
+        scrollCodigo.setBounds(140, 90, 435, 485);
         scrollCodigo.setBorder(null);
         add(scrollCodigo);
         
@@ -120,7 +121,7 @@ public class Interfaz extends JFrame {
         add(lResultado);
         
         bCorrer = new JButton("▷");
-        bCorrer.setBounds(900, 41, 60, 38);
+        bCorrer.setBounds(990, 41, 60, 38);
         bCorrer.setBackground(grisClaro);
         bCorrer.setForeground(colorFuenteAzul);
         bCorrer.setFont(new Font("SansSerif", Font.BOLD, 24));
@@ -130,24 +131,24 @@ public class Interfaz extends JFrame {
         add(bCorrer);
         
         txtpaneResultado = new JTextPane();
-        txtpaneResultado.setFont(fuenteCodigo);
+        txtpaneResultado.setFont(fuenteResultado);
         txtpaneResultado.setForeground(colorFuente);
         txtpaneResultado.setBackground(grisClaro);
         txtpaneResultado.setEditable(false);
         scrollResultado = new JScrollPane(txtpaneResultado);
-        scrollResultado.setBounds(590, 90, 360, 410);
+        scrollResultado.setBounds(590, 90, 445, 485);
         scrollResultado.setBorder(null);
         add(scrollResultado);
         
         // ### Páneles ###
         pBarraLateral = new JPanel();
-        pBarraLateral.setBounds(0, 40, 131, 500);
+        pBarraLateral.setBounds(0, 40, 131, 550);
         pBarraLateral.setBackground(grisOscuro);
         pBarraLateral.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         add(pBarraLateral);
         
         pTaskbar = new JPanel();
-        pTaskbar.setBounds(0, 0, 960, 41);
+        pTaskbar.setBounds(0, 0, 1050, 41);
         pTaskbar.setBackground(gris);
         pTaskbar.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         add(pTaskbar);
@@ -159,7 +160,7 @@ public class Interfaz extends JFrame {
         add(pResultadoSuperior);
         
         pResultadoInferior = new JPanel();
-        pResultadoInferior.setBounds(580, 78, 850, 460);
+        pResultadoInferior.setBounds(580, 78, 850, 530);
         pResultadoInferior.setBackground(grisClaro);
         pResultadoInferior.setBorder(BorderFactory.createLineBorder(gris));
         add(pResultadoInferior);

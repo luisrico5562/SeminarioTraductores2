@@ -210,7 +210,7 @@ public class AnalizadorLexico {
         // Quitando la última posición vacía para evitar que se analice
         if (resultado[posicionesResultado-1][0] == "") {
             posicionesResultado--;
-            System.out.println("-" + resultado[posicionesResultado][0] + "-");
+            //System.out.println("-" + resultado[posicionesResultado][0] + "-");
             resultado[posicionesResultado][0] = null;
         }
         // Se evalúa con el autómata cada dato obtenido

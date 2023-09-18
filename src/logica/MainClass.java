@@ -10,7 +10,7 @@ public class MainClass {
         Interfaz interfaz = new Interfaz();
         Color fondo = new Color(31, 31, 31);
         
-        interfaz.setBounds(0, 0, 960, 540);
+        interfaz.setBounds(0, 0, 1050, 620);
         interfaz.getContentPane().setBackground(fondo);
         interfaz.setUndecorated(false);
         interfaz.setTitle("Analizador léxico");

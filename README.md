@@ -1,4 +1,3 @@
-## Analizador sintáctico
 ### [Mini analizador sintáctico - implementación con objetos](https://github.com/luisrico5562/SeminarioTraductores2/tree/Analizador-sintactico-implementacion-con-objetos)
 En analizador ahora es capaz de imprimir el símbolo del elemento analizado.
 

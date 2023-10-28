@@ -84,7 +84,11 @@ public class Listener implements ActionListener {
             interfaz.bSemantico.setFont(fuenteTaskbar);
         }
 
-        if (e.getSource() == interfaz.bCorrer && interfaz.analizadorActual == 1) {          // LEXICO
+        if (e.getSource() == interfaz.bCorrer && interfaz.txtpaneCodigo.getText().trim().equals("")) {
+            interfaz.txtpaneResultado.setText("");
+            
+        } else if (e.getSource() == interfaz.bCorrer && interfaz.analizadorActual == 1) {          // LEXICO
+            interfaz.txtpaneResultado.setText("");
             
             // Se manda todo el texto de txtPaneCodigo
             // y se retorna un arreglo de dos dimensiones 
@@ -128,6 +132,7 @@ public class Listener implements ActionListener {
             
             
         } else if (e.getSource() == interfaz.bCorrer && interfaz.analizadorActual == 2) {   // SINTACTICO
+            interfaz.txtpaneResultado.setText("");
             
             String[][] analizadoLex;
             AnalizadorLexico anLexico = new AnalizadorLexico();
@@ -180,8 +185,102 @@ public class Listener implements ActionListener {
             }
 
         } else if (e.getSource() == interfaz.bCorrer && interfaz.analizadorActual == 3) {   // SEMANTICO
-            
             interfaz.txtpaneResultado.setText("");
+            
+            String[][] analizadoLex;
+            AnalizadorLexico anLexico = new AnalizadorLexico();
+            analizadoLex = anLexico.lexico(interfaz.txtpaneCodigo.getText().trim());
+            
+            //String[] valoresLex = new String[100];
+            Stack pilaLex = new Stack();
+            boolean errorLexico = false;
+            int largoAnLex = 0;
+            
+            // Analizando la entrada con el analizador léxico
+            
+            for (int i = 0; i < 100; i++) {
+                if (analizadoLex[i][0] == null) {
+                    largoAnLex = i;
+                    break;
+                }
+                
+                if (Integer.parseInt(analizadoLex[i][1]) == 24) {
+                    interfaz.txtpaneResultado.setText("Error léxico: '" + analizadoLex[i][0] + "'");
+                    errorLexico = true;
+                    break;
+                }
+                pilaLex.push(analizadoLex[i][1]);
+            }
+            
+            // Invirtiendo la pila
+            Stack pilaLexVolteada = new Stack();
+            pilaLexVolteada.push("$");
+            while (pilaLex.empty() != true) {
+                pilaLexVolteada.push(pilaLex.peek());
+                pilaLex.pop();
+            }
+            
+            // Se analiza sintácticamente si no hay errores léxicos
+            boolean errorSintactico = false;
+            if (errorLexico == false) {
+                String[][] analizadoSin;
+                AnalizadorSintactico anSintactico = new AnalizadorSintactico();
+                analizadoSin = anSintactico.sintactico(pilaLexVolteada, analizadoLex, largoAnLex);
+                
+                String texto = "";
+                
+                // Se imprimen los estados de la pila
+                for (int i = 0; i < 100; i++) {
+                    if (analizadoSin[i][0] == null) {
+                        break;
+                    }
+                    texto += analizadoSin[i][0] + "\n";
+                    if (analizadoSin[i][0].contains("Error sintáctico: ")) {
+                        interfaz.txtpaneResultado.setText(analizadoSin[i][0]);
+                        errorSintactico = true;
+                    }
+                }
+            }
+            
+            // Se analiza semánticamente si no hay errores sintácticos
+            if (errorLexico == false && errorSintactico == false) {
+                String[][] resultadoAnSem;
+                AnalizadorSemantico anSemantico = new AnalizadorSemantico();
+                
+                resultadoAnSem = anSemantico.semantico(pilaLexVolteada, analizadoLex, largoAnLex);
+                
+                String texto = "";
+                
+                for (int i = 0; i < resultadoAnSem.length; i++) {
+                    if (resultadoAnSem[i][0] == null) {
+                        break;
+                    }
+                    //System.out.println(resultadoAnSem[i][0] + " - " + resultadoAnSem[i][1] + " - " + resultadoAnSem[i][2]);
+                    
+                    if(!resultadoAnSem[i][0].contains("Error")) {
+                        for (int j = 0; j < Integer.valueOf(resultadoAnSem[i][0]); j++) {
+                            texto += "  ";
+                        }
+                        
+                        //texto += "- " + resultadoAnSem[i][1] + " " + resultadoAnSem[i][2] + "\n";
+                        
+                        
+                        if (resultadoAnSem[i][1].equals("")) {
+                            texto += "- " + resultadoAnSem[i][2] + "\n";
+                        } else {
+                            texto += "- " + resultadoAnSem[i][1] + " " + resultadoAnSem[i][2] + "\n";
+                        }
+                        
+                        
+                        
+                    } else {
+                        texto += resultadoAnSem[i][0];
+                        break;
+                    }
+                }
+                
+                interfaz.txtpaneResultado.setText(texto);
+            }
 
         }
     }

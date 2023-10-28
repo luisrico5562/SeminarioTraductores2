@@ -16,11 +16,31 @@ public class AnalizadorLexico {
         
         int posSinEspacios = 0;
         int espacio = 0;
+        int comillas = 0;
         
         // --- SEPARACIÓN POR ESPACIOS ---
         for (int i = 0; i < cadena.length(); i++) {
+            
+            // Si hay una cadena delimitada con comillas
+            if (cadena.charAt(i) == '"') {
+                if (comillas == 1) {
+                    comillas = 0;
+                    arSinEspacios[posSinEspacios] += '"';
+                    
+                    
+                } else {
+                    posSinEspacios++;
+                    if (arSinEspacios[posSinEspacios] == null) {
+                        arSinEspacios[posSinEspacios] = "";
+                    }
+                    arSinEspacios[posSinEspacios] += '"';
+                    comillas = 1;
+                }
+            } else if (comillas == 1) {
+                arSinEspacios[posSinEspacios] += cadena.charAt(i);
+            
             //                                                          // 13 = enter               // 9 = tabulación
-            if (cadena.charAt(i) != ' ' && cadena.charAt(i) != '\n' && cadena.charAt(i) != 13 && cadena.charAt(i) != 9) {
+            } else if (cadena.charAt(i) != ' ' && cadena.charAt(i) != '\n' && cadena.charAt(i) != 13 && cadena.charAt(i) != 9) {
                 if (espacio == 0) {
                     // Se inicializa la cadena
                     if (arSinEspacios[posSinEspacios] == null) {
@@ -234,7 +254,8 @@ public class AnalizadorLexico {
         if (caracter >= 65 && caracter <= 90 ||
             caracter >= 97 && caracter <= 122 ||
             caracter >= 48 && caracter <= 57 ||
-            caracter == '.') {
+            caracter == '.' || caracter == '"' ||
+            caracter == ':' || caracter == ' ') {
             return 1;
         }
         // Operadores
@@ -340,6 +361,10 @@ public class AnalizadorLexico {
         } else if (cadena.charAt(0) == ',') {        
             cadena = recorrer(cadena);
             return s44(cadena);
+            
+        } else if (cadena.charAt(0) == '"') {
+            cadena = recorrer(cadena);
+            return s45(cadena);
         }
         return 24;
     }
@@ -879,4 +904,26 @@ public class AnalizadorLexico {
         }
         return 24;
     }
+    
+    public int s45(String cadena) {
+        if (cadena == "") {
+            return 24;
+            
+        } else if (cadena.charAt((0)) == '"') {
+            cadena = recorrer(cadena);
+            return s46(cadena);
+        } else if (tipoCaracter(cadena.charAt((0))) == 1) {
+            cadena = recorrer(cadena);
+            return s45(cadena);
+        }
+        return 24;
+    }
+    
+    public int s46(String cadena) {
+        if (cadena == "") {
+            return 3;
+        }
+        return 24;
+    }
+    
 }

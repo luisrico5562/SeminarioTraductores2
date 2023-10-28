@@ -13,7 +13,7 @@ public class MainClass {
         interfaz.setBounds(0, 0, 1050, 620);
         interfaz.getContentPane().setBackground(fondo);
         interfaz.setUndecorated(false);
-        interfaz.setTitle("Analizador léxico");
+        interfaz.setTitle("Analizador");
         interfaz.setVisible(true);
         interfaz.setResizable(false);
         interfaz.setLocationRelativeTo(null);

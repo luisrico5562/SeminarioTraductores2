@@ -7,7 +7,7 @@ public class AnalizadorSintactico {
     public String[][] sintactico(Stack pilaLex, String[][] analizadoLex, int largoEntrada) {
         
         // Variable para guardar los estados de la pila
-        String[][] textoPila = new String[100][2];
+        String[][] textoPila = new String[300][2];
         
         Stack pila = new Stack();
         pila.push("$");

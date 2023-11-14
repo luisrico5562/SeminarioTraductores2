@@ -185,6 +185,7 @@ public class Listener implements ActionListener {
             }
 
         } else if (e.getSource() == interfaz.bCorrer && interfaz.analizadorActual == 3) {   // SEMANTICO
+            System.out.println("---------------------");
             interfaz.txtpaneResultado.setText("");
             
             String[][] analizadoLex;

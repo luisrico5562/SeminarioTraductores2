@@ -102,3 +102,9 @@ En esta etapa del analizador se crea un árbol del código el cual, en mi caso, 
 
 
 [Ver etapa analizador sintáctico - árbol (branch)](https://github.com/luisrico5562/SeminarioTraductores2/tree/Etapa-arbol-analizador-sintactico)
+
+### Analizador semántico 
+Se analiza el código semánticamente.
+#### El resultado es el siguiente:
+![java_fHzgELnk3G](https://github.com/luisrico5562/SeminarioTraductores2/assets/127691671/2797a8db-d870-4c01-84ff-b98bf1412089)
+[Ver etapa analizador semántico](https://github.com/luisrico5562/SeminarioTraductores2/tree/Etapa-analisis-semantico)

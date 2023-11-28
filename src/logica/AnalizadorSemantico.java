@@ -33,10 +33,8 @@ public class AnalizadorSemantico {
                 // #############################################################################################
                 for (int j = 0; j < listaSem.length; j++) {
                     if (listaSem[j][2] == null) {
-                        System.out.println("");
                         break;
                     }
-                    System.out.println(listaSem[j][0] + " - " + listaSem[j][1] + " - " + listaSem[j][2] + " - " + listaSem[j][3]);
                 }
                 // #############################################################################################
                 // #############################################################################################
@@ -141,10 +139,9 @@ public class AnalizadorSemantico {
                             return listaVarFun;
                         }
                         listaVarFun[posListaVarFun][0] = String.valueOf(nivelVar);
-                        listaVarFun[posListaVarFun][1] = "";
+                        listaVarFun[posListaVarFun][1] = "var";
                         listaVarFun[posListaVarFun][2] = analizadoLex[i][0];
                         posListaVarFun++;
-                        nivelVar++;
                     
                     // Entero
                     } else if (analizadoLex[i][1].equals("1")) {
@@ -153,10 +150,9 @@ public class AnalizadorSemantico {
                             return listaVarFun;
                         }
                         listaVarFun[posListaVarFun][0] = String.valueOf(nivelVar);
-                        listaVarFun[posListaVarFun][1] = "";
+                        listaVarFun[posListaVarFun][1] = "int";
                         listaVarFun[posListaVarFun][2] = analizadoLex[i][0];
                         posListaVarFun++;
-                        nivelVar++;
                        
                     // Float
                     } else if (analizadoLex[i][1].equals("2")) {
@@ -165,10 +161,9 @@ public class AnalizadorSemantico {
                             return listaVarFun;
                         }
                         listaVarFun[posListaVarFun][0] = String.valueOf(nivelVar);
-                        listaVarFun[posListaVarFun][1] = "";
+                        listaVarFun[posListaVarFun][1] = "float";
                         listaVarFun[posListaVarFun][2] = analizadoLex[i][0];
                         posListaVarFun++;
-                        nivelVar++;
                     
                     // Operadores
                     } else if (analizadoLex[i][1].equals("5")
@@ -177,7 +172,6 @@ public class AnalizadorSemantico {
                         listaVarFun[posListaVarFun][1] = "";
                         listaVarFun[posListaVarFun][2] = analizadoLex[i][0];
                         posListaVarFun++;
-                        nivelVar++;
                     }
                 }
                 
@@ -233,7 +227,6 @@ public class AnalizadorSemantico {
                         listaVarFun[posListaVarFun][1] = "";
                         listaVarFun[posListaVarFun][2] = analizadoLex[i][0];
                         posListaVarFun++;
-                        nivelVar++;
                         
                     } else if (analizadoLex[i][1].equals("1") 
                             || analizadoLex[i][1].equals("2") || analizadoLex[i][1].equals("3")) {
@@ -241,7 +234,6 @@ public class AnalizadorSemantico {
                         listaVarFun[posListaVarFun][1] = "";
                         listaVarFun[posListaVarFun][2] = analizadoLex[i][0];
                         posListaVarFun++;
-                        nivelVar++;
                     }
                 }
                 nivelVar = nivelActual;
@@ -261,8 +253,8 @@ public class AnalizadorSemantico {
                 i += 2;
                 
                 listaVarFun[posListaVarFun][0] = String.valueOf(nivelVar);
-                listaVarFun[posListaVarFun][1] = "comp";
-                listaVarFun[posListaVarFun][2] = "";
+                listaVarFun[posListaVarFun][1] = "";
+                listaVarFun[posListaVarFun][2] = "comp";
                 nivelVar++;
                 posListaVarFun++;
                 
@@ -290,15 +282,18 @@ public class AnalizadorSemantico {
                         listaVarFun[posListaVarFun][0] = "Error semántico: " + analizadoLex[i][0] + " no declarada.";
                         return listaVarFun;
                     }
+                    listaVarFun[posListaVarFun][1] = "var";
+                    
                 // Entero
                 } else if (analizadoLex[i][1].equals("1")) {
                    tipoPrimerVar = "int";
+                   listaVarFun[posListaVarFun][1] = "int";
 
                // Float
                } else if (analizadoLex[i][1].equals("2")) {
                    tipoPrimerVar = "float";
+                   listaVarFun[posListaVarFun][1] = "float";
                }
-                nivelVar++;
                 posListaVarFun++;
                 i++;
                 
@@ -306,7 +301,6 @@ public class AnalizadorSemantico {
                 listaVarFun[posListaVarFun][0] = String.valueOf(nivelVar);
                 listaVarFun[posListaVarFun][1] = "";
                 listaVarFun[posListaVarFun][2] = analizadoLex[i][0];
-                nivelVar++;
                 posListaVarFun++;
                 i++;
                 
@@ -334,13 +328,16 @@ public class AnalizadorSemantico {
                         listaVarFun[posListaVarFun][0] = "Error semántico: " + analizadoLex[i][0] + " no declarada.";
                         return listaVarFun;
                     }
+                    listaVarFun[posListaVarFun][1] = "var";
                 // Entero
                 } else if (analizadoLex[i][1].equals("1")) {
                    tipoSegundaVar = "int";
+                   listaVarFun[posListaVarFun][1] = "int";
 
                // Float
                 } else if (analizadoLex[i][1].equals("2")) {
                     tipoSegundaVar = "float";
+                    listaVarFun[posListaVarFun][1] = "float";
                 }
                 // Si no coincide con el tipo de variable
                 if (!tipoPrimerVar.equals(tipoSegundaVar)) {
@@ -348,7 +345,6 @@ public class AnalizadorSemantico {
                     return listaVarFun;
                 }
                 
-                nivelVar++;
                 posListaVarFun++;
                 i++;
                 

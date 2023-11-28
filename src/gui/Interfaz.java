@@ -9,8 +9,8 @@ public class Interfaz extends JFrame {
     
     // Taskbar
     private JPanel pBarraLateral, pTaskbar;
-    private JLabel lanalizador;
-    public JButton bReiniciar, bLexico, bSintactico, bSemantico;
+    public JLabel lanalizador;
+    public JButton bReiniciar, bLexico, bSintactico, bSemantico, bGenerarCodigo;
     public int analizadorActual = 1; // 1 = léxico, 2 = sintáctico, 3 = semántico
     
     // Código
@@ -56,8 +56,18 @@ public class Interfaz extends JFrame {
         lanalizador.setFont(fuenteTaskbar);
         add(lanalizador);
 
+        bGenerarCodigo = new JButton("Generar código");
+        bGenerarCodigo.setBounds(130, 0, 180, 40);
+        bGenerarCodigo.setBackground(gris);
+        bGenerarCodigo.setForeground(colorFuenteTB);
+        bGenerarCodigo.setFont(fuenteInterfaz);
+        bGenerarCodigo.setBorderPainted(false);
+        bGenerarCodigo.setFocusPainted(false);
+        bGenerarCodigo.addActionListener(listener);
+        add(bGenerarCodigo);
+        
         bReiniciar = new JButton("Reiniciar");
-        bReiniciar.setBounds(130, 0, 140, 40);
+        bReiniciar.setBounds(310, 0, 140, 40);
         bReiniciar.setBackground(gris);
         bReiniciar.setForeground(colorFuenteTB);
         bReiniciar.setFont(fuenteInterfaz);
